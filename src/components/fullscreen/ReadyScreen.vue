@@ -21,7 +21,7 @@
         </div>
         <div class="btns">
             <button class="btn-primary" @click="getReady">Begin test</button>
-            <button class="btn-secondary">Go back</button>
+            <router-link class="btn-secondary" to="/" >Go back</router-link>
         </div>
     </div>
 </template>
@@ -98,8 +98,12 @@ const props = defineProps<{
         gap: 0.5rem;
         margin-top: 2.625rem;
 
-        button {
+        button, a {
             font-size: 0.9375rem;
+        }
+
+        a {
+            text-decoration: none;
         }
     }
 }

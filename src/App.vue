@@ -11,7 +11,11 @@ import HeaderComponent from '@/components/reusable/HeaderComponent.vue';
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:wght@700&family=PT+Serif:wght@700&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@700&family=PT+Serif:wght@700&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+    --primary-color: blueviolet;
+}
 
 * {
     box-sizing: border-box;
@@ -34,6 +38,7 @@ p {
 button {
     background: none;
     border: none;
+    cursor: pointer;
     font-size: 1rem;
     outline: none;
 }
@@ -59,13 +64,13 @@ footer {
 
 .btn-secondary {
     @extend %btn;
-    border: 1px solid darkblue;
-    color: darkblue;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
 }
 
 .btn-primary {
     @extend %btn;
-    background-color: darkblue;
+    background-color: var(--primary-color);
     color: white;
 }
 
