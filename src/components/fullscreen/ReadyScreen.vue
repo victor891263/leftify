@@ -1,11 +1,11 @@
 <template>
     <div id="ready">
-        <h1>You are about to take the test.</h1>
+        <h1>Before you take the test.</h1>
         <div class="body">
             <div>
                 <p>The test consists of two types of questions:</p>
                 <ol>
-                    <li>A statement will be given and you'll be asked to agree or disagree with it, or</li>
+                    <li>A statement will be given to you and you'll be asked to agree or disagree with it, or</li>
                     <li>You'll be provided with multiple statements and you'll be asked to pick the one you agree the most with.</li>
                 </ol>
             </div>
@@ -14,13 +14,13 @@
             <div class="warning">
                 <div class="title">
                     <WarningIcon :bold="true" />
-                    <div>Keep in mind.</div>
+                    <div>Keep in mind</div>
                 </div>
                 <p>Refreshing the page at any time during the test or when the results are being shown will cause the answers to be reset and the results to dissappear.</p>
             </div>
         </div>
         <div class="btns">
-            <button class="btn-primary" @click="getReady">Begin test</button>
+            <button class="btn-primary" @click="getReady">Begin</button>
             <router-link class="btn-secondary" to="/" >Go back</router-link>
         </div>
     </div>
@@ -40,8 +40,8 @@ const props = defineProps<{
     max-width: 540px;
 
     h1 {
+        line-height: 1.2;
         margin-bottom: 2.5rem;
-        max-width: 8em;
     }
 
     .body {
@@ -59,12 +59,10 @@ const props = defineProps<{
             line-height: 1.6;
         }
 
-        li::marker {
-            font-weight: bold;
-        }
-
         .warning {
-            background-color: whitesmoke;
+            background-color: var(--black-10);
+            border: 1px solid var(--black-30);
+            border-radius: 1rem;
             display: grid;
             grid-row-gap: 1rem;
             margin-top: 0.75rem;
@@ -77,25 +75,25 @@ const props = defineProps<{
 
                 svg {
                     display: flex;
-                    fill: gray;
+                    fill: var(--black-50);
                     height: 0.875rem;
                 }
 
                 div {
-                    color: gray;
-                    font-weight: bold;
+                    color: var(--black-50);
+                    font-variation-settings: 'wght' 650;
                 }
             }
 
             p {
-                color: gray;
+                color: var(--black-50);
             }
         }
     }
 
     .btns {
         display: flex;
-        gap: 0.5rem;
+        gap: 0.4375rem;
         margin-top: 2.625rem;
 
         button, a {

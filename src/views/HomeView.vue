@@ -1,19 +1,28 @@
 <template>
     <div id="home">
-        <h1>Are you a leftist? If so, what type?</h1>
-        <div class="text">
-            <p>Take this test to find out how similar your views on society and your values are to what is commonly considered left-wing.</p>
-            <p></p>
-        </div>
+        <h1>Find out if you're left-wing.</h1>
+        <p>A comprehensive questionnaire that determines if your views and values are similar to what is considered left-wing.</p>
         <div class="btns">
-            <router-link to="/test" class="btn-primary">Begin test</router-link>
+            <span @click="refreshTest"><router-link to="/test" class="btn-primary">Take the test</router-link></span>
             <router-link to="/about" class="btn-secondary">Learn more</router-link>
         </div>
-        <div class="sub">Not familiar with political terms? <a href="#">View glossary</a></div>
+        <div class="sub">Not familiar with the terms? <router-link to="/glossary">View glossary</router-link></div>
     </div>
 </template>
 
 <script setup lang="ts">
+import questions from '@/data/questions'
+import answers from '@/store/answers'
+import display from '@/store/isReady'
+import currentQuestion from '@/store/currentQuestion'
+
+function refreshTest() {
+    answers.value.forEach(a => {
+        a.chosen = undefined
+    })
+    display.value = 'test'
+    currentQuestion.value = questions[0]
+}
 </script>
 
 <style lang="scss">
@@ -21,62 +30,50 @@
     text-align: center;
 
     h1 {
-        line-height: 1.3;
+        font-size: 2.125rem;
+        line-height: 1.2;
         margin-left: auto;
         margin-right: auto;
-        max-width: 9em;
     }
 
-    .text {
-        margin-top: 1.25rem;
-        max-width: 30em;
+    p {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.375rem;
+        max-width: 29em;
     }
 
     .btns {
         display: flex;
-        gap: 0.5rem;
+        gap: 0.4375rem;
         justify-content: center;
         margin-top: 1.5rem;
 
         a {
-            font-size: 0.9375rem;
-            text-decoration: none;
+            font-size: 0.875rem;
         }
     }
 
     .sub {
-        color: darkgray;
         font-size: 0.875rem;
-        margin-top: 1.75rem;
-
-        a {
-            color: darkgray;
-        }
+        margin-top: 1.875rem;
     }
 }
 
 @media (min-width: 1536px) {
     #home {
         h1 {
-            font-size: 2.25rem;
+            font-size: 3rem;
+            letter-spacing: -0.025em;
         }
 
-        .text {
+        p {
             font-size: 1.125rem;
-            margin-top: 1.375rem;
         }
 
-        .btns {
-            margin-top: 1.625rem;
-
-            a {
-                font-size: 1rem;
-            }
-        }
-
+        .btns a,
         .sub {
             font-size: 1rem;
-            margin-top: 1.875rem;
         }
     }
 }

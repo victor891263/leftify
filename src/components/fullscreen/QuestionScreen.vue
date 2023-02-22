@@ -1,7 +1,8 @@
 <template>
     <div class="question">
         <div class="current-question-label">{{ `${currentQuestionIndex + 1}/${questions.length}` }}</div>
-        <p>{{ currentQuestion.body }}</p>
+        <p class="term-expander" v-html="currentQuestion.body"></p>
+        <p v-if="currentQuestion.note" class="note">{{ currentQuestion.note }}</p>
         <AnswerComponent />
         <div class="navigation">
             <button v-show="currentQuestionIndex > 0" @click="() => changeQuestion(-1)">
@@ -12,41 +13,76 @@
                 <div>Next</div>
                 <ArrowIcon/>
             </button>
+            <button v-if="currentQuestionIndex === (questions.length - 1)" :disabled="!areAllQuestionsAnswered" @click="() => getResult()">
+                <div>Finalize</div>
+                <ArrowIcon/>
+            </button>
         </div>
     </div>
 </template>
 
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, defineProps, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import questions from '@/data/questions'
+import definitions from '@/data/definitions'
+import answers from '@/store/answers'
 import currentQuestion from '@/store/currentQuestion'
 import AnswerComponent from '@/components/reusable/AnswerComponent.vue'
 import ArrowIcon from '@/components/icons/ArrowIcon.vue'
+
+const router = useRouter()
+const props = defineProps<{
+    getResult: () => void
+}>()
 
 const currentQuestionIndex = computed(() => {
     return questions.map(q => q.id).indexOf(currentQuestion.value.id)
 })
 
+const areAllQuestionsAnswered = computed(() => {
+    return answers.value.find(a => a.chosen === undefined) ? false : true
+})
+
 function changeQuestion(count: number) {
     currentQuestion.value = questions[currentQuestionIndex.value + count]
 }
+
+onMounted(() => {
+    document.querySelectorAll('.term-expander').forEach(b => {
+        b.addEventListener('click', (e: any) => {
+            if (e.target.hasAttribute('data-name')) {
+                const termName: string = e.target.attributes['data-name'].value
+                const termIndex = definitions.map(d => d.title.toLowerCase()).indexOf(termName.toLowerCase())
+                router.push(`/glossary/${termIndex}`)
+            }
+        })
+    })
+})
 </script>
+
+
 
 
 <style lang="scss">
 .question {
     display: grid;
     grid-row-gap: 1.5rem;
-    max-width: 540px;
+    max-width: 720px;
 
     .current-question-label {
-        color: darkgray;
-        font-weight: 600;
+        color: var(--black-40);
+        font-variation-settings: 'wght' 550;
     }
 
     > p {
-        font-weight: 600;
+        font-variation-settings: 'wght' 550;
+        white-space: pre-wrap;
+
+        button {
+            color: var(--primary-color);
+        }
     }
 
     .navigation {
@@ -80,8 +116,11 @@ function changeQuestion(count: number) {
         button:last-of-type {
             justify-self: right;
         }
+
+        button[disabled] {
+            cursor: default;
+            opacity: 0.5;
+        }
     }
 }
 </style>
-
-<!--v-show="currentQuestion > 0"-->

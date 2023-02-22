@@ -14,6 +14,16 @@ const routes: Array<RouteRecordRaw> = [
         component: TestView
     },
     {
+        path: '/glossary',
+        name: 'glossary',
+        component: () => import('../views/GlossaryIndex.vue')
+    },
+    {
+        path: '/glossary/:id',
+        name: 'term',
+        component: () => import('../views/TermView.vue')
+    },
+    {
         path: '/about',
         name: 'about',
         component: () => import('../views/AboutView.vue')

@@ -1,25 +1,15 @@
-interface IAnswer {
-    questionId: number,
-    chosen: undefined | {
-        id: number,
-        body: string,
-        reductions?: number[],
-        removals?: number[],
-        note?: string
-    }
+import { ref } from "vue"
+import { IAnswer } from "@/types"
+import questions from "@/data/questions"
+
+const array: IAnswer[] = []
+for (let i = 1; i <= questions.length; i++) {
+    array.push({
+        questionId: i,
+        chosen: undefined
+    })
 }
 
-import { ref } from "vue"
-
-const answers = ref<IAnswer[]>([
-    {
-        questionId: 1,
-        chosen: undefined
-    },
-    {
-        questionId: 2,
-        chosen: undefined
-    }
-])
+const answers = ref<IAnswer[]>(array)
 
 export default answers

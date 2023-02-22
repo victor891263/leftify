@@ -1,37 +1,34 @@
 <template>
     <div class="answers">
-        <button
+        <div
         v-for="choice in currentQuestion.choices"
         :key="choice.id"
         class="answer"
-        @click="() => selectAnswer(choice)"
         :data-checked="answers.find(a => a.questionId === currentQuestion.id)!.chosen === choice"
         >
-            <div class="circle">
+            <button class="circle" @click="() => selectAnswer(choice)">
                 <div></div>
-            </div>
+            </button>
             <div>
-                <p>{{ choice.body }}</p>
-                <p v-if="choice.note">{{ choice.note }}</p>
+                <p class="term-expander" v-html="choice.body"></p>
+                <p v-if="choice.note" v-html="choice.note"></p>
             </div>
-        </button>
+        </div>
     </div>
 </template>
 
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import definitions from '@/data/definitions'
 import currentQuestion from '@/store/currentQuestion'
 import answers from '@/store/answers'
+import { IChoice } from '@/types'
 
-interface IOption {
-    id: number,
-    body: string,
-    reductions?: number[],
-    removals?: number[],
-    note?: string
-}
+const router = useRouter()
 
-function selectAnswer(option: IOption) {
+function selectAnswer(option: IChoice) {
     const ans = answers.value.find(a => a.questionId === currentQuestion.value.id)
     if (ans) ans.chosen = option
 }
@@ -52,10 +49,9 @@ function selectAnswer(option: IOption) {
     width: fit-content;
 
     .circle {
-        border: 1px solid black;
+        border: 1px solid var(--black-90);
         border-radius: 50%;
         height: 1.5rem;
-        margin-top: 0.0625rem;
         width: 1.5rem;
 
         align-items: center;
@@ -68,17 +64,17 @@ function selectAnswer(option: IOption) {
             width: 50%;
         }
     }
-}
 
-.answer:hover .circle {
-    border-color: blueviolet;
+    p button {
+        color: var(--primary-color);
+    }
 }
 
 .answer[data-checked=true] .circle {
-    border-color: blueviolet;
+    border-color: var(--primary-color);
 
     div {
-        background-color: blueviolet;
+        background-color: var(--primary-color);
     }
 }
 </style>
