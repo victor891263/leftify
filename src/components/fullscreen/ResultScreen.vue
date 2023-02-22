@@ -5,8 +5,6 @@
             <div>Results summarized —</div>
             <h1>{{ resultText?.title }}</h1>
         </div>
-        <p>{{ resultText?.description }}</p>
-        <p>The following percentages are calculated based on if you picked the left-wing option (the answer which a typical leftist would choose) and various categories each question belong to.</p>
         <div class="categories">
             <div v-for="category in filteredResult" :key="category.id">
                 <div class="name">{{ category.name }}</div>
@@ -19,7 +17,11 @@
                 </div>
             </div>
         </div>
-        <p>You can retake the test as many times as you want. Remember that your current result will disappear if you choose to retake the test and it won't be possible to recover the result once it is gone.</p>
+        <div class="result-text">
+            <p>{{ resultText?.description }}</p>
+            <p>The following percentages are calculated based on if you picked the left-wing option (the answer which a typical leftist would choose) and various categories each question belong to.</p>
+            <p>You can retake the test as many times as you want. Remember that your current result will disappear if you choose to retake the test and it won't be possible to recover the result once it is gone.</p>
+        </div>
         <button @click="resetTest" class="btn-secondary retake-btn">Retake the test</button>
     </div>
 </template>
@@ -164,8 +166,8 @@ function generateText(result: IResult[], explanations: IExplanation[]) {
     .categories {
         display: grid;
         grid-row-gap: 2.5rem;
+        margin-top: 0.75rem;
         margin-bottom: 0.5rem;
-        margin-top: 0.5rem;
 
         > div {
             display: grid;
@@ -194,6 +196,11 @@ function generateText(result: IResult[], explanations: IExplanation[]) {
                 }
             }
         }
+    }
+
+    .result-text {
+        display: grid;
+        grid-row-gap: 1.375rem;
     }
 
     .retake-btn {
