@@ -43,7 +43,7 @@ header {
 
     svg {
         fill: var(--black-90);
-        height: 1.125rem;
+        height: 1rem;
     }
 }
 </style>
