@@ -20,7 +20,7 @@ function refreshTest() {
     answers.value.forEach(a => {
         a.chosen = undefined
     })
-    display.value = 'test'
+    display.value = 'ready'
     currentQuestion.value = questions[0]
 }
 </script>
