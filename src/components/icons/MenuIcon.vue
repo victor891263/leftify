@@ -1,0 +1,3 @@
+<template>
+    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57.5 49.57"><title>rerererer</title><path d="M65.81,43.48H13.31a2.5,2.5,0,0,0,0,5h52.5a2.5,2.5,0,0,0,0-5Z" transform="translate(-10.81 -21.2)"/><path d="M13.31,26.2h52.5a2.5,2.5,0,0,0,0-5H13.31a2.5,2.5,0,1,0,0,5Z" transform="translate(-10.81 -21.2)"/><path d="M65.81,65.76H13.31a2.5,2.5,0,0,0,0,5h52.5a2.5,2.5,0,0,0,0-5Z" transform="translate(-10.81 -21.2)"/></svg>
+</template>

@@ -1,34 +1,24 @@
 <template>
     <div id="ready">
-        <h1>Before you take the test.</h1>
-        <div class="body">
-            <div>
-                <p>The test consists of two types of questions:</p>
-                <ol>
-                    <li>A statement will be given to you and you'll be asked to agree or disagree with it, or</li>
-                    <li>You'll be provided with multiple statements and you'll be asked to pick the one you agree the most with.</li>
-                </ol>
-            </div>
-            <p>Once you've provided answers to all questions, you can finalize and get results. You can go back to any question and change your answer as many times as you want before doing this.</p>
-            <p>There are a total of 32 questions. The test has no time limit.</p>
-            <div class="warning">
-                <div class="title">
-                    <WarningIcon :bold="true" />
-                    <div>Keep in mind</div>
-                </div>
-                <p>Refreshing the page at any time during the test or when the results are being shown will cause the answers to be reset and the results to dissappear.</p>
-            </div>
-        </div>
-        <div class="btns">
-            <button class="btn-primary" @click="getReady">Begin</button>
-            <router-link class="btn-secondary" to="/" >Go back</router-link>
-        </div>
+        <h1>About this test</h1>
+        <p>The test consists of two types of questions:</p>
+        <ul>
+            <li>
+                <p>A statement will be given to you and you'll be asked to agree or disagree with it; or</p>
+            </li>
+            <li>
+                <p>You'll be provided with multiple statements and you'll be asked to pick the one you agree the most with.</p>
+            </li>
+        </ul>
+        <p>Once you've provided answers to all questions, you can finalize and get results. You can go back to any question and change your answer as many times as you want before doing this.</p>
+        <p>There are a total of <b>32</b> questions. The test has <b>no time limit</b>.</p>
+        <p class="warning"><b>Remember:</b> refreshing the page at any time during the test or when the results are being shown will cause the answers to be reset and the results to dissappear.</p>
+        <button class="btn-primary" @click="getReady">Begin</button>
     </div>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import WarningIcon from '@/components/icons/WarningIcon.vue'
 
 const props = defineProps<{
     getReady: () => void
@@ -37,72 +27,42 @@ const props = defineProps<{
 
 <style lang="scss">
 #ready {
+    display: grid;
+    grid-row-gap: 1.2rem;
     max-width: 540px;
 
     h1 {
-        line-height: 1.2;
-        margin-bottom: 2.5rem;
+        font-size: 1.875rem;
+        margin-bottom: 0.8rem;
     }
 
-    .body {
+    ul {
         display: grid;
-        grid-row-gap: 1.25rem;
-
-        ol {
-        display: grid;
-        grid-row-gap: 1.125rem;
+        grid-row-gap: 1.2rem;
         margin-left: 1rem;
-        margin-top: 1.125rem;
-        }
+    }
 
-        li {
-            line-height: 1.6;
-        }
+    .warning {
+        background-color: var(--black-10);
+        border-radius: 0.75rem;
+        color: var(--black-50);
+        margin-top: 0.75rem;
+        padding: 1.25rem 1.5rem;
 
-        .warning {
-            background-color: var(--black-10);
-            border: 1px solid var(--black-30);
-            border-radius: 1rem;
-            display: grid;
-            grid-row-gap: 1rem;
-            margin-top: 0.75rem;
-            padding: 1.25rem 1.5rem;
-
-            .title {
-                align-items: center;
-                display: flex;
-                gap: 0.5rem;
-
-                svg {
-                    display: flex;
-                    fill: var(--black-50);
-                    height: 0.875rem;
-                }
-
-                div {
-                    color: var(--black-50);
-                    font-variation-settings: 'wght' 650;
-                }
-            }
-
-            p {
-                color: var(--black-50);
-            }
+        b {
+            color: var(--black-50);
         }
     }
 
-    .btns {
-        display: flex;
-        gap: 0.4375rem;
-        margin-top: 2.625rem;
+    button {
+        font-size: 0.9375rem;
+        margin-top: 1.25rem;
+    }
+}
 
-        button, a {
-            font-size: 0.9375rem;
-        }
-
-        a {
-            text-decoration: none;
-        }
+@media (min-width: 720px) {
+    button {
+        width: fit-content;
     }
 }
 </style>

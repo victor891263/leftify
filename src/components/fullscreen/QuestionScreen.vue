@@ -73,16 +73,20 @@ onMounted(() => {
 
     .current-question-label {
         color: var(--black-40);
-        font-variation-settings: 'wght' 550;
+        font-weight: 500;
     }
 
     > p {
-        font-variation-settings: 'wght' 550;
+        font-weight: 500;
         white-space: pre-wrap;
 
         button {
             color: var(--primary-color);
         }
+    }
+
+    > p.note {
+        font-style: italic;
     }
 
     .navigation {

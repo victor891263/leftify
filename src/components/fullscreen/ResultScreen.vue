@@ -1,10 +1,8 @@
 <template>
     <div id="result">
-        <div class="date">Generated on {{ new Date().toLocaleString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) }}.</div>
-        <div class="title">
-            <div>Results summarized —</div>
-            <h1>{{ resultText?.title }}</h1>
-        </div>
+        <div class="date">Generated on {{ new Date().toLocaleString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) }}</div>
+        <h1>{{ resultText?.title }}</h1>
+        <p>{{ resultText?.description }}</p>
         <div class="categories">
             <div v-for="category in filteredResult" :key="category.id">
                 <div class="name">{{ category.name }}</div>
@@ -18,11 +16,15 @@
             </div>
         </div>
         <div class="result-text">
-            <p>{{ resultText?.description }}</p>
-            <p>The following percentages are calculated based on if you picked the left-wing option (the answer which a typical leftist would choose) and various categories each question belong to.</p>
-            <p>You can retake the test as many times as you want. Remember that your current result will disappear if you choose to retake the test and it won't be possible to recover the result once it is gone.</p>
+            <p>The percentages are calculated based on if you picked the left-wing option (the answer which a typical leftist would choose) and various categories each question belong to.</p>
+            
         </div>
-        <button @click="resetTest" class="btn-secondary retake-btn">Retake the test</button>
+        <div class="retaking">
+            <h2>Retaking</h2>
+            <p>You can retake the test as many times as you want. Remember that your current result will disappear if you choose to retake the test and it won't be possible to recover the result once it is gone.</p>
+            <button @click="resetTest" class="btn-secondary retake-btn">Retake the test</button>
+        </div>
+        
     </div>
 </template>
 
@@ -141,33 +143,18 @@ function generateText(result: IResult[], explanations: IExplanation[]) {
 <style lang="scss">
 #result {
     display: grid;
-    grid-row-gap: 2rem;
+    grid-row-gap: 1.875rem;
     max-width: 540px;
-
-    p {
-        line-height: 1.65;
-    }
 
     .date {
         color: var(--black-50);
-        margin-bottom: 0.5rem;
-    }
-
-    .title {
-        div {
-            font-variation-settings: 'wght' 575;
-        }
-        
-        h1 {
-            margin-top: 0.5rem;
-        }
+        margin-bottom: 0.125rem;
     }
 
     .categories {
         display: grid;
         grid-row-gap: 2.5rem;
-        margin-top: 0.75rem;
-        margin-bottom: 0.5rem;
+        margin-top: 0.625rem;
 
         > div {
             display: grid;
@@ -180,7 +167,7 @@ function generateText(result: IResult[], explanations: IExplanation[]) {
             }
 
             .name {
-                font-variation-settings: 'wght' 550;
+                font-weight: 500;
             }
 
             .bar {
@@ -196,16 +183,35 @@ function generateText(result: IResult[], explanations: IExplanation[]) {
                 }
             }
         }
+
+        p {
+            color: var(--black-50);
+        }
     }
 
     .result-text {
         display: grid;
-        grid-row-gap: 1.375rem;
+        grid-row-gap: 1.2rem;
+        margin-top: 0.5rem;
+
+        > p:first-of-type {
+            color: var(--black-50);
+        }
     }
 
-    .retake-btn {
-        font-size: 0.9375rem;
-        width: fit-content;
+    .retaking {
+        margin-top: 2.25rem;
+        display: grid;
+        grid-row-gap: 1.5rem;
+
+        h2 {
+            font-size: 1.625rem;
+        }
+
+        button {
+            font-size: 0.9375rem;
+            width: fit-content;
+        }
     }
 }
 </style>
